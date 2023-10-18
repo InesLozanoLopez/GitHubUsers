@@ -1,0 +1,33 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "format": "prettier --write \"**/*.tsx\" \"**/*.tsx\""
+  },
+  "dependencies": {
+    "@octokit/rest": "^20.0.2",
+    "imagemin-mozjpeg": "^8.0.0",
+    "imagemin-optipng": "^8.0.0",
+    "imagemin-svgo": "^7.0.0",
+    "next": "^13.4.8",
+    "next-compose-plugins": "^2.2.1",
+    "next-optimized-images": "^2.6.2",
+    "react": "^18",
+    "react-dom": "^18",
+    "sharp": "^0.32.6"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "13.5.4",
+    "prettier": "^3.0.3",
+    "typescript": "^5"
+  }
+}
