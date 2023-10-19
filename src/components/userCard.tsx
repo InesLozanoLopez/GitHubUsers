@@ -1,18 +1,18 @@
 'Use Client';
 
 import './styles/userCard.css';
-import { fetchUserDetails } from '@/apiServices';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { IUserDetails } from '@/interfaces';
 import { useRouter } from 'next/navigation';
+import { useUserDetailsContext } from '@/app/page';
 
 export default function UserCard({ url }: { url: string }) {
-  const [userData, setUserData] = useState<IUserDetails | null>(null);
+  const {userDetails, aPIUserDetails} = useUserDetailsContext();
   const router = useRouter();
 
   useEffect(() => {
-    fetchUserDetails({ url, setUserData: setUserData });
+    aPIUserDetails(url);
   }, [url]);
 
   const handleMoreInfoClick = (userData: IUserDetails) => {
@@ -22,17 +22,17 @@ export default function UserCard({ url }: { url: string }) {
 
   return (
     <div className="userCard" aria-label="User Information">
-      {userData && (
+      {userDetails && (
         <div
           arial-label="View more information"
-          onClick={() => handleMoreInfoClick(userData)}
+          onClick={() => handleMoreInfoClick(userDetails)}
         >
           <div className="topCard">
             <div className="avatarImgContainer">
               <Image
                 className="avatarImg"
-                src={userData?.avatar_url}
-                aria-label={`${userData?.login}'s avatar`}
+                src={userDetails?.avatar_url}
+                aria-label={`${userDetails?.login}'s avatar`}
                 alt="User avatar"
                 width={150}
                 height={150}
@@ -43,9 +43,9 @@ export default function UserCard({ url }: { url: string }) {
 
           <div className="bottomCard">
             <p className="detailsLine">User name:</p>
-            <p className="userInfo">{userData?.login}</p>
+            <p className="userInfo">{userDetails?.login}</p>
             <p className="detailsLine">Name:</p>
-            <p className="userInfo">{userData?.name}</p>
+            <p className="userInfo">{userDetails?.name}</p>
           </div>
           <button
             title="More information"

@@ -1,8 +1,27 @@
 import './globals.css';
 import UsersList from './../components/usersList';
 import Image from 'next/image';
+import { fetchUserDetails } from '@/apiServices';
+import { createContext, useContext, useState } from 'react';
+import {IUserDetails} from './../interfaces';
+
+const usersDetailsContext = createContext<{userDetails: IUserDetails | null; aPIUserDetails: (url:string) => void}>({
+  userDetails: null,
+  aPIUserDetails: () => {},
+});
+
+export const useUserDetailsContext = () => {
+  return useContext(usersDetailsContext);
+}
 
 export default function Home() {
+  const [userDetails, setUserDetails] = useState<IUserDetails | null>(null);
+
+  const aPIUserDetails = (url: string) => {
+    fetchUserDetails({ url, setUserData: setUserDetails });
+  };
+
+
   return (
     <>
       <header>
@@ -18,9 +37,11 @@ export default function Home() {
           />
         </div>
       </header>
-      <main>
-        <UsersList />
-      </main>
+      <usersDetailsContext.Provider value={{ userDetails, aPIUserDetails }}>
+        <main>
+          <UsersList />
+        </main>
+      </usersDetailsContext.Provider>
     </>
   );
 }

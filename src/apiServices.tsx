@@ -14,6 +14,7 @@ export const fetchUsersList = async ({
       },
     });
     if (response) {
+      console.log('fetchUsersList', response);
       const data: IUserFetch[] = await response.data.map(
         (user: IUserFetch) => ({
           id: user.id,
@@ -37,6 +38,7 @@ export const fetchUserDetails = async ({
   try {
     const response = await fetch(url);
     if (response) {
+      console.log('fetchUserDetails', response);
       const userDetails: IUserDetails = await response.json();
       setUserData(userDetails);
     }
@@ -55,6 +57,7 @@ export const fetchUserFollowers = async ({
   try {
     const response = await fetch(url);
     if (response) {
+      console.log('fetchUserFollowers', response);
       const userFollower: IUserDetails[] = await response.json();
       setUsersAvatar(userFollower);
     } else {
@@ -81,6 +84,7 @@ export const fetchUserFollowing = async ({
       },
     });
     if (response) {
+      console.log('fetchUserFollowing', response);
       const data: IUserDetails[] = await response.data;
       setUsersAvatar(data);
     }
