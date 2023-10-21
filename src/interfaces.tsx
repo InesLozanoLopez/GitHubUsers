@@ -1,8 +1,3 @@
-export interface IUserFetch {
-  id: number;
-  url: string;
-}
-
 export interface IUserDetails {
   login: string;
   id: number;

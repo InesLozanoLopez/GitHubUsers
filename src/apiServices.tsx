@@ -1,46 +1,30 @@
 import { Octokit } from '@octokit/rest';
-import { IUserDetails, IUserFetch } from './interfaces';
+import { IUserDetails } from './interfaces';
 
-export const fetchUsersList = async ({
-  setUserData,
-}: {
-  setUserData: React.Dispatch<IUserFetch[]>;
-}) => {
+export const fetchUsersList = async () => {
   const octokit = new Octokit();
   try {
     const response = await octokit.request<any>('GET /users', {
       headers: {
         'X-GitHub-Api-Version': '2022-11-28',
       },
+      per_page: 20,
     });
     if (response) {
-      console.log('fetchUsersList', response);
-      const data: IUserFetch[] = await response.data.map(
-        (user: IUserFetch) => ({
-          id: user.id,
-          url: user.url,
-        }),
-      );
-      setUserData(data);
+      return response;
     }
   } catch (error) {
     throw error;
   }
 };
 
-export const fetchUserDetails = async ({
-  url,
-  setUserData,
-}: {
-  url: string;
-  setUserData: React.Dispatch<IUserDetails>;
-}) => {
+export const fetchUserDetails = async (
+  url: string) => {
   try {
     const response = await fetch(url);
     if (response) {
-      console.log('fetchUserDetails', response);
       const userDetails: IUserDetails = await response.json();
-      setUserData(userDetails);
+      return userDetails;
     }
   } catch (error) {
     throw error;

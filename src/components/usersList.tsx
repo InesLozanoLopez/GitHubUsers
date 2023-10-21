@@ -1,26 +1,19 @@
-'use client';
-
 import './styles/usersList.css';
-import { IUserFetch } from '@/interfaces';
-import { useState, useEffect } from 'react';
+import { IUserDetails } from '@/interfaces';
 import UserCard from './userCard';
-import { fetchUsersList } from '@/apiServices';
+import { useUsersContext } from '@/app/page';
 
 export default function UserList() {
-  const [userData, setUserData] = useState<IUserFetch[]>([]);
-
-  useEffect(() => {
-    fetchUsersList({ setUserData });
-  }, []);
+  const { userDetails } = useUsersContext();
 
   return (
     <div className="listOfUsersContainer">
       <div className="listOfUsersBackground"></div>
-      {userData && (
+      {userDetails && (
         <ul className="gridListOfUsers">
-          {userData.map((user: IUserFetch) => (
+          {userDetails.map((user: IUserDetails) => (
             <li key={user.id}>
-              <UserCard url={user.url} />
+              <UserCard user={user} />
             </li>
           ))}
         </ul>

@@ -1,19 +1,11 @@
-'Use Client';
-
 import './styles/userCard.css';
 import Image from 'next/image';
-import { useEffect } from 'react';
 import { IUserDetails } from '@/interfaces';
 import { useRouter } from 'next/navigation';
-import { useUserDetailsContext } from '@/app/page';
 
-export default function UserCard({ url }: { url: string }) {
-  const {userDetails, aPIUserDetails} = useUserDetailsContext();
+export default function UserCard({ user }: { user: IUserDetails }) {
+  const userDetails = user;
   const router = useRouter();
-
-  useEffect(() => {
-    aPIUserDetails(url);
-  }, [url]);
 
   const handleMoreInfoClick = (userData: IUserDetails) => {
     const path = `${userData?.login}`;

@@ -1,22 +1,19 @@
-'use client';
+'use client'
 
 import './../components/styles/userDetails.css';
-import { useEffect } from 'react';
 import { toCapitaliseFirstLetter } from '@/functions';
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import UsersFollow from './usersFollow';
-import { useUserDetailsContext } from '@/app/page';
+import { useUsersContext } from '@/app/page';
 
 export default function UserDetails() {
-  const {userDetails, aPIUserDetails} = useUserDetailsContext();
-  const router = useRouter();
+  const usersList = useUsersContext();
+  console.log(usersList);
+  const { login } = useParams();
+  const user = usersList.userDetails.find((user) => user.login === login);
 
-  useEffect(() => {
-    const { login } = useParams();
-  const url = `https://api.github.com/users/${login}`;
-  aPIUserDetails(url);
-  }, [{useParams}]);
+  const router = useRouter();
 
   const handleBacktoUserListClick = () => {
     const path = '/';
@@ -25,45 +22,45 @@ export default function UserDetails() {
 
   return (
     <>
-      {userDetails && (
+       {user && (
         <>
           <header>
             <section className="userPageHead" aria-label="User Information">
-              <h1> {toCapitaliseFirstLetter(userDetails?.login)} </h1>
+              <h1> {toCapitaliseFirstLetter(user?.login)} </h1>
               <div className="headInfo">
-                <p>Repositories: {userDetails?.public_repos}</p>
+                <p>Repositories: {user?.public_repos}</p>
               </div>
             </section>
           </header>
           <main>
             <section className="userDetailsContainer" aria-label="User Details">
               <div className="detailsBlock">
-                {userDetails?.name && (
+                {user?.name && (
                   <>
                     <p className="detailsLine">Name:</p>
-                    <p className="userInfo">{userDetails?.name}</p>
+                    <p className="userInfo">{user?.name}</p>
                   </>
                 )}
-                {userDetails?.location && (
+                {user?.location && (
                   <>
                     <p className="detailsLine">Location:</p>
-                    <p className="userInfo">{userDetails?.location}</p>
+                    <p className="userInfo">{user?.location}</p>
                   </>
                 )}
-                {userDetails?.company && (
+                {user?.company && (
                   <>
                     <p className="detailsLine">
-                      {userDetails?.company?.length > 1 ? 'Companies' : 'Company'}:
+                      {user?.company?.length > 1 ? 'Companies' : 'Company'}:
                     </p>
-                    <p className="userInfo">{userDetails?.company}</p>
+                    <p className="userInfo">{user?.company}</p>
                   </>
                 )}
               </div>
               <div className="detailsImgContainer">
                 <Image
                   className="detailsImg"
-                  src={userDetails?.avatar_url}
-                  alt={`${userDetails?.login}'s avatar`}
+                  src={user?.avatar_url}
+                  alt={`${user?.login}'s avatar`}
                   width={200}
                   height={200}
                   loading="lazy"
@@ -71,19 +68,19 @@ export default function UserDetails() {
               </div>
 
               <div className="detailsBlock">
-                {userDetails?.twitter_username && (
+                {user?.twitter_username && (
                   <>
                     <p className="detailsLine">Twitter:</p>
-                    <p className="userInfo">@{userDetails?.twitter_username}</p>
+                    <p className="userInfo">@{user?.twitter_username}</p>
                   </>
                 )}
-                {userDetails?.twitter_username && (
+                {user?.twitter_username && (
                   <>
                     <p className="detailsLine">Blog:</p>
                     <p className="userInfo">
-                      {userDetails?.blog && (
+                      {user?.blog && (
                         <a
-                          href={userDetails.blog}
+                          href={user.blog}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
@@ -98,7 +95,7 @@ export default function UserDetails() {
 
             <hr className="horizontalLines" />
             <section aria-label="Followers">
-              <UsersFollow url={userDetails?.followers_url} />
+              <UsersFollow url={user?.followers_url} />
             </section>
             <hr className="horizontalLines" />
 
@@ -106,8 +103,8 @@ export default function UserDetails() {
               <hr className="horizontalLines light" />
               <section aria-label="Following">
                 <UsersFollow
-                  url={userDetails?.following_url}
-                  login={userDetails?.login}
+                  url={user?.following_url}
+                  login={user?.login}
                 />
                 <Image
                   className="catImg"

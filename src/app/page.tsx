@@ -1,25 +1,39 @@
+'use client'
+
 import './globals.css';
 import UsersList from './../components/usersList';
 import Image from 'next/image';
-import { fetchUserDetails } from '@/apiServices';
-import { createContext, useContext, useState } from 'react';
-import {IUserDetails} from './../interfaces';
+import { fetchUserDetails, fetchUsersList } from '@/apiServices';
+import { createContext, useContext, useEffect, useState } from 'react';
+import { IUserDetails } from './../interfaces';
 
-const usersDetailsContext = createContext<{userDetails: IUserDetails | null; aPIUserDetails: (url:string) => void}>({
-  userDetails: null,
-  aPIUserDetails: () => {},
-});
+const usersContext = createContext<{ userDetails: IUserDetails[] }>({ userDetails: [] });
 
-export const useUserDetailsContext = () => {
-  return useContext(usersDetailsContext);
+export const useUsersContext = () => {
+  return useContext(usersContext);
 }
 
 export default function Home() {
-  const [userDetails, setUserDetails] = useState<IUserDetails | null>(null);
+  const [usersList, setUsersList] = useState<IUserDetails[] | []>([]);
 
-  const aPIUserDetails = (url: string) => {
-    fetchUserDetails({ url, setUserData: setUserDetails });
-  };
+  useEffect(() => {
+    const fetchUserListAndUpdateList = async () => {
+      try {
+        const userListFetched = await fetchUsersList();
+        const usersData = userListFetched.data;
+        const updatedUsers = await Promise.all(
+          usersData.map(async (user: IUserDetails) => {
+            const details = await fetchUserDetails(user.url);
+            return { ...user, ...details };
+          })
+        );
+        setUsersList(updatedUsers)
+      } catch (error) {
+        console.log(error)
+      }
+    };
+    fetchUserListAndUpdateList();
+  }, []);
 
 
   return (
@@ -37,11 +51,11 @@ export default function Home() {
           />
         </div>
       </header>
-      <usersDetailsContext.Provider value={{ userDetails, aPIUserDetails }}>
+      <usersContext.Provider value={{ userDetails: usersList || [] }}>
         <main>
           <UsersList />
         </main>
-      </usersDetailsContext.Provider>
+      </usersContext.Provider>
     </>
   );
 }
