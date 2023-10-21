@@ -43,18 +43,9 @@ export default function UsersFollow({
       {isLoading ? (
         <div className="avatarContainer">
           <div
-            className="avatarImgContainer"
-            role="presentation"
             aria-label="Loading content"
           >
-            <Image
-              className="avatarImg"
-              src="/loadingImg.gif"
-              alt={'Loading...'}
-              width={100}
-              height={100}
-              priority={true}
-            />
+            <h2>Loading...</h2>
           </div>
         </div>
       ) : (
