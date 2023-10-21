@@ -3,38 +3,9 @@
 import './globals.css';
 import UsersList from './../components/usersList';
 import Image from 'next/image';
-import { fetchUserDetails, fetchUsersList } from '@/apiServices';
-import { createContext, useContext, useEffect, useState } from 'react';
-import { IUserDetails } from './../interfaces';
-
-const usersContext = createContext<{ userDetails: IUserDetails[] }>({ userDetails: [] });
-
-export const useUsersContext = () => {
-  return useContext(usersContext);
-}
+import UsersContext from '@/context';
 
 export default function Home() {
-  const [usersList, setUsersList] = useState<IUserDetails[] | []>([]);
-
-  useEffect(() => {
-    const fetchUserListAndUpdateList = async () => {
-      try {
-        const userListFetched = await fetchUsersList();
-        const usersData = userListFetched.data;
-        const updatedUsers = await Promise.all(
-          usersData.map(async (user: IUserDetails) => {
-            const details = await fetchUserDetails(user.url);
-            return { ...user, ...details };
-          })
-        );
-        setUsersList(updatedUsers)
-      } catch (error) {
-        console.log(error)
-      }
-    };
-    fetchUserListAndUpdateList();
-  }, []);
-
 
   return (
     <>
@@ -51,11 +22,11 @@ export default function Home() {
           />
         </div>
       </header>
-      <usersContext.Provider value={{ userDetails: usersList || [] }}>
+      <UsersContext>
         <main>
           <UsersList />
         </main>
-      </usersContext.Provider>
+        </UsersContext>
     </>
   );
 }

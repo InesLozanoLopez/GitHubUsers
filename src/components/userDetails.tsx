@@ -5,15 +5,13 @@ import { toCapitaliseFirstLetter } from '@/functions';
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import UsersFollow from './usersFollow';
-import { useUsersContext } from '@/app/page';
+import {useUsersContext} from '@/context';
 
 export default function UserDetails() {
-  const usersList = useUsersContext();
-  console.log(usersList);
   const { login } = useParams();
-  const user = usersList.userDetails.find((user) => user.login === login);
-
   const router = useRouter();
+  const {userDetails} = useUsersContext();
+  const user = userDetails?.find((user) => user.login === login)
 
   const handleBacktoUserListClick = () => {
     const path = '/';

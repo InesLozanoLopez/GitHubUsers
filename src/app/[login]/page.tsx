@@ -1,11 +1,15 @@
 import './../globals.css';
 import UserDetails from '../../components/userDetails';
+import UsersContext from '@/context';
 
 export default function UserDetailsPage() {
   return (
     <main>
-      <div className="main"></div>
-      <UserDetails />
-    </main>
+      <UsersContext>
+      <div className="main">
+        <UserDetails />
+      </div>
+    </UsersContext>
+    </main >
   );
 }
