@@ -8,7 +8,7 @@ export const fetchUsersList = async () => {
       headers: {
         'X-GitHub-Api-Version': '2022-11-28',
       },
-      per_page: 4,
+      per_page: 3,
     });
     if (response) {
       return response;
@@ -46,7 +46,6 @@ export const fetchUserFollowers = async ({
   try {
     const response = await fetch(url);
     if (response) {
-      console.log('fetchUserFollowers', response);
       const userFollower: IUserDetails[] = await response.json();
       setUsersAvatar(userFollower);
     } else {
@@ -73,7 +72,6 @@ export const fetchUserFollowing = async ({
       },
     });
     if (response) {
-      console.log('fetchUserFollowing', response);
       const data: IUserDetails[] = await response.data;
       setUsersAvatar(data);
     }

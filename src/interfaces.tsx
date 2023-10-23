@@ -2,6 +2,7 @@ export interface IUserDetails {
   userData: any;
   login: string;
   id: number;
+  avatar_url: string,
   data: {
     avatar_url: string;
     url: string;
