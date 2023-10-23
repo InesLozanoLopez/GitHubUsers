@@ -60,7 +60,7 @@ export default function UsersFollow({
               >
                 <Image
                   className="avatarImg"
-                  src={user?.avatar_url}
+                  src={user?.data.avatar_url}
                   alt={`${login}'s ${
                     login
                       ? `Following: ${usersAvatar.length}`

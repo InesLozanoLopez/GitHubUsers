@@ -23,7 +23,7 @@ export default function UserCard({ user }: { user: IUserDetails }) {
             <div className="avatarImgContainer">
               <Image
                 className="avatarImg"
-                src={userDetails?.avatar_url}
+                src={userDetails?.data.avatar_url}
                 aria-label={`${userDetails?.login}'s avatar`}
                 alt="User avatar"
                 width={150}
@@ -37,7 +37,7 @@ export default function UserCard({ user }: { user: IUserDetails }) {
             <p className="detailsLine">User name:</p>
             <p className="userInfo">{userDetails?.login}</p>
             <p className="detailsLine">Name:</p>
-            <p className="userInfo">{userDetails?.name}</p>
+            <p className="userInfo">{userDetails?.data.name}</p>
           </div>
           <button
             title="More information"

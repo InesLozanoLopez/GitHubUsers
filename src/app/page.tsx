@@ -26,7 +26,7 @@ export default function Home() {
         <main>
           <UsersList />
         </main>
-        </UsersContext>
+      </UsersContext>
     </>
   );
 }

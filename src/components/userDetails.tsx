@@ -26,38 +26,38 @@ export default function UserDetails() {
             <section className="userPageHead" aria-label="User Information">
               <h1> {toCapitaliseFirstLetter(user?.login)} </h1>
               <div className="headInfo">
-                <p>Repositories: {user?.public_repos}</p>
+                <p>Repositories: {user?.data.public_repos}</p>
               </div>
             </section>
           </header>
           <main>
             <section className="userDetailsContainer" aria-label="User Details">
               <div className="detailsBlock">
-                {user?.name && (
+                {user?.data.name && (
                   <>
                     <p className="detailsLine">Name:</p>
-                    <p className="userInfo">{user?.name}</p>
+                    <p className="userInfo">{user?.data.name}</p>
                   </>
                 )}
-                {user?.location && (
+                {user?.data.location && (
                   <>
                     <p className="detailsLine">Location:</p>
-                    <p className="userInfo">{user?.location}</p>
+                    <p className="userInfo">{user?.data.location}</p>
                   </>
                 )}
-                {user?.company && (
+                {user?.data.company && (
                   <>
                     <p className="detailsLine">
-                      {user?.company?.length > 1 ? 'Companies' : 'Company'}:
+                      {user?.data.company?.length > 1 ? 'Companies' : 'Company'}:
                     </p>
-                    <p className="userInfo">{user?.company}</p>
+                    <p className="userInfo">{user?.data.company}</p>
                   </>
                 )}
               </div>
               <div className="detailsImgContainer">
                 <Image
                   className="detailsImg"
-                  src={user?.avatar_url}
+                  src={user?.data.avatar_url}
                   alt={`${user?.login}'s avatar`}
                   width={200}
                   height={200}
@@ -66,19 +66,19 @@ export default function UserDetails() {
               </div>
 
               <div className="detailsBlock">
-                {user?.twitter_username && (
+                {user?.data.twitter_username && (
                   <>
                     <p className="detailsLine">Twitter:</p>
-                    <p className="userInfo">@{user?.twitter_username}</p>
+                    <p className="userInfo">@{user?.data.twitter_username}</p>
                   </>
                 )}
-                {user?.twitter_username && (
+                {user?.data.twitter_username && (
                   <>
                     <p className="detailsLine">Blog:</p>
                     <p className="userInfo">
-                      {user?.blog && (
+                      {user?.data.blog && (
                         <a
-                          href={user.blog}
+                          href={user.data.blog}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
@@ -93,7 +93,7 @@ export default function UserDetails() {
 
             <hr className="horizontalLines" />
             <section aria-label="Followers">
-              <UsersFollow url={user?.followers_url} />
+              <UsersFollow url={user?.data.followers_url} />
             </section>
             <hr className="horizontalLines" />
 
@@ -101,7 +101,7 @@ export default function UserDetails() {
               <hr className="horizontalLines light" />
               <section aria-label="Following">
                 <UsersFollow
-                  url={user?.following_url}
+                  url={user?.data.following_url}
                   login={user?.login}
                 />
                 <Image

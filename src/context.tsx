@@ -18,11 +18,9 @@ export default function UsersContext({ children }: { children: ReactNode }) {
             try {
                 const userListFetched = await fetchUsersList();
                 const usersData = userListFetched.data;
-                console.log('usersData', usersData)
                 const updatedUsers = await Promise.all(
                     usersData.map(async (user: IUserDetails) => {
                         const details = await fetchUserDetails(user.login);
-                        console.log('details', details);
                         return { ...user, ...details };
                     })
                 );
