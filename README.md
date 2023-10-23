@@ -2,8 +2,7 @@
 Small GitHub Users App done in Next.js
 
 
- <Image src="@/usersListImg" alt="Users List Screenshot" width="200" height="auto" style="border: solid black 4px"/>
-
+<img src="@/usersListImg" alt="Users List Screenshot" width="200" height="auto" style="border: solid black 4px"/>
 
 ##To run this app:
 
