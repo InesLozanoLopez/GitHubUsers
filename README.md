@@ -1,9 +1,7 @@
 # GitHubUsers
 Small GitHub Users App done in Next.js
 
-![Users List Screenshot](/usersListImg.png)
-
-<img src="./public/usersListImg.png" alt="Users List Screenshot" width="200" height="auto" style="border: solid black 4px"/>
+<img src="./public/usersListImg.png" alt="Users List Screenshot" width="300" height="auto" style="border: solid black 4px"/>
 
 ##To run this app:
 
