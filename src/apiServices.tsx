@@ -2,15 +2,13 @@ import { Octokit } from '@octokit/rest';
 import { IUserDetails } from './interfaces';
 
 export const fetchUsersList = async () => {
-  const octokit = new Octokit({
-    auth: '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'
-  });
+  const octokit = new Octokit();
   try {
     const response = await octokit.request<any>('GET /users', {
       headers: {
         'X-GitHub-Api-Version': '2022-11-28',
       },
-      per_page: 3,
+      per_page: 4,
     });
     if (response) {
       return response;
@@ -23,9 +21,7 @@ export const fetchUsersList = async () => {
 export const fetchUserDetails = async (
   login: string) => {
   try {
-    const octokit = new Octokit({
-      auth: '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'
-    });
+    const octokit = new Octokit();
     const response = await octokit.request(`GET /users/${login}`, {
       username: 'USERNAME',
       headers: {
