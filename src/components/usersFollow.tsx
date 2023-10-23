@@ -16,6 +16,7 @@ export default function UsersFollow({
   const [usersAvatar, setUsersAvatar] = useState<IUserDetails[]>([]);
   const [isLoading, setIsLoading] = useState<Boolean>(true);
 
+
   useEffect(() => {
     if (login) {
       fetchUserFollowing({ login, setUsersAvatar: setUsersAvatar }).then(() =>
@@ -27,6 +28,8 @@ export default function UsersFollow({
       );
     }
   }, [url, login]);
+
+  console.log('usersAvatar', usersAvatar);
 
   return (
     <section
@@ -40,7 +43,7 @@ export default function UsersFollow({
             : `Followers: ${usersAvatar.length}`}
         </h3>
       </div>
-      {isLoading ? (
+      {/* {isLoading ? (
         <div className="avatarContainer">
           <div
             aria-label="Loading content"
@@ -60,7 +63,7 @@ export default function UsersFollow({
               >
                 <Image
                   className="avatarImg"
-                  src={user?.data.avatar_url}
+                  src={user?.avatar_url}
                   alt={`${login}'s ${
                     login
                       ? `Following: ${usersAvatar.length}`
@@ -72,8 +75,8 @@ export default function UsersFollow({
                 />
               </div>
             ))}
-        </div>
-      )}
+        </div> */}
+      {/* )} */}
     </section>
   );
 }
