@@ -3,6 +3,10 @@
   --mid: #727272;
   --light: #F9F9F9;
 }
+html, body{
+  width: 100%;
+  height: auto;
+}
 
 body{
   margin: 0%;

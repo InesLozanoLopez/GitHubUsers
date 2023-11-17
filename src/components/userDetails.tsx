@@ -14,6 +14,7 @@ export default function UserDetails() {
   const user = userDetails?.find((user) => user.login === login)
 
   const handleBacktoUserListClick = () => {
+    console.log('bottom clicked')
     const path = '/';
     router.push(path);
   };

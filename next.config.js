@@ -7,6 +7,7 @@ const nextConfig = {
     images: {
         domains:['avatars.githubusercontent.com']
     },
+    reactStrictMode: false,
 }
 
 module.exports = withPlugins([optimizedImages], nextConfig)

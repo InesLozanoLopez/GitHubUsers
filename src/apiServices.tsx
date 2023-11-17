@@ -8,7 +8,7 @@ export const fetchUsersList = async () => {
       headers: {
         'X-GitHub-Api-Version': '2022-11-28',
       },
-      per_page: 3,
+      per_page: 10,
     });
     if (response) {
       return response;
