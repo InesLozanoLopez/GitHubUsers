@@ -1,6 +1,7 @@
-import './styles/userCard.css';
+'use Client'
+import styles from './../styles/userCard.module.css';
 import Image from 'next/image';
-import { IUserDetails } from '@/interfaces';
+import { IUserDetails } from '../interfaces/interfaces';
 import { useRouter } from 'next/navigation';
 
 export default function UserCard({ user }: { user: IUserDetails }) {
@@ -13,17 +14,17 @@ export default function UserCard({ user }: { user: IUserDetails }) {
   };
 
   return (
-    <div className="userCard" aria-label="User Information">
+    <div className={styles.userCard} aria-label="User Information">
       {userDetails && (
         <div
           arial-label="View more information"
           onClick={() => handleMoreInfoClick(userDetails)}
         >
-          <div className="topCard">
+          <div className={styles.topCard}>
             <div className="avatarImgContainer">
               <Image
-                className="avatarImg"
-                src={userDetails?.data.avatar_url}
+                className={styles.avatarImg}
+                src={userDetails?.avatar_url}
                 aria-label={`${userDetails?.login}'s avatar`}
                 alt="User avatar"
                 width={150}
@@ -33,16 +34,16 @@ export default function UserCard({ user }: { user: IUserDetails }) {
             </div>
           </div>
 
-          <div className="bottomCard">
-            <p className="detailsLine">User name:</p>
-            <p className="userInfo">{userDetails?.login}</p>
-            <p className="detailsLine">Name:</p>
-            <p className="userInfo">{userDetails?.data.name}</p>
+          <div className={styles.bottomCard}>
+            <p className={styles.detailsLine}>User name:</p>
+            <p className={styles.userInfo}>{userDetails?.login}</p>
+            <p className={styles.detailsLine}>Name:</p>
+            <p className={styles.userInfo}>{userDetails?.name}</p>
           </div>
           <button
             title="More information"
             aria-label="Click for more Information"
-            className="detailsLine moreInfo"
+            className={`${styles.detailsLine} ${styles.button}`}
           >
             + Details
           </button>

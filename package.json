@@ -10,7 +10,7 @@
     "format": "prettier --write \"**/*.tsx\" \"**/*.tsx\""
   },
   "dependencies": {
-    "@octokit/rest": "^20.0.2",
+    "axios": "^1.6.5",
     "imagemin-mozjpeg": "^8.0.0",
     "imagemin-optipng": "^8.0.0",
     "imagemin-svgo": "^7.0.0",

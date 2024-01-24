@@ -1,0 +1,148 @@
+/* Head */
+
+#userPageHead {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--dark);
+  color: var(--light);
+  padding: 2vh 3vh 1vh;
+  gap: 0px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
+}
+
+.headInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+/* User Information */
+
+#userDetailsContainer {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(auto, 1fr));
+  align-items: flex-start;
+  justify-content: center;
+  margin: 3vh 2vh;
+  grid-auto-flow: row;
+}
+
+@media (max-width: 450px) {
+  #userDetailsContainer{
+  grid-template-rows: repeat(2, auto);
+  grid-template-columns: 1fr;
+
+  }
+  #userDetailsContainer .detailsBlock1 {
+    padding-top: 3vw;
+    grid-row: 2;
+    padding-left: 6vw;
+  }
+
+  #userDetailsContainer .detailsImgContainer {
+    grid-row: 1;
+    justify-self: center;
+    }
+
+  #userDetailsContainer .detailsBlock2 {
+    grid-row: 3;
+    padding-left: 6vw;
+
+  }
+}
+
+
+.detailsBlock1, .detailsBlock2 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 3vh;
+  max-height: 100vh;
+}
+
+.detailsLine {
+  color: var(--dark);
+  margin: 0;
+  font-size: 2.5vh;
+}
+
+.userInfo {
+  color: var(--dark);
+  margin: 0%;
+  padding: 2vh;
+}
+
+/* Other */
+
+.detailsImgContainer {
+  display: flex;
+  justify-content: center;
+  background: none;
+  max-width: 50vw;
+  max-height: 50vw;
+}
+
+.detailsImg {
+  border-radius: 50%;
+  width: 100%;
+  max-width: 300vh;
+  height: auto;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8);
+}
+
+.horizontalLines {
+  border-color: var(--dark);
+  background-color: var(--dark);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
+  height: 0.5vh;
+  width: 100%;
+}
+
+.horizontalLines.light {
+  border-color: var(--light);
+  background-color: var(--light);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  height: 0.5vh;
+  width: 100%;
+  position: relative;
+}
+
+.catImg {
+  width: auto;
+  max-height: fit-content;
+  max-width: 20%;
+  background: none;
+  position: absolute;
+  top: 37%;
+  left: 79%
+}
+
+/* Bottom page */
+.userPageBottomBackground {
+  margin: 0%;
+  background: linear-gradient(to bottom right, var(--light) 49.5%, transparent 49.5%, transparent 50.5%), linear-gradient(to bottom left, var(--light-blue) 49.5%, transparent 49.5%, transparent 50.5%);
+  background-color: var(--dark);
+  min-height: 20vh;
+  position: relative;
+}
+
+#userPageBottom {
+  margin-top: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 10vh;
+}
+
+.button {
+  margin: 1%;
+  padding: 1%;
+  border-radius: 20%;
+  border: var(--light) solid 3px;
+  background-color: var(--dark);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.6);
+  color: var(--light);
+  font-weight: bold;
+  font-size: 2vh;
+}

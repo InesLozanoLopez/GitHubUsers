@@ -1,20 +1,20 @@
 'use client'
 
-import './styles/usersList.css';
-import { IUserDetails } from '@/interfaces';
+import style from './../styles/usersList.module.css';
+import { IUserDetails } from '../interfaces/interfaces';
 import UserCard from './userCard';
-import { useUsersContext } from '@/context';
+import { useUsersContext } from '../context/UsersContextProvider';
 
-export default function UserList() {
-  const { userDetails } = useUsersContext();
+const UserList: React.FC = () => {
+  const {usersDetails} = useUsersContext();
 
   return (
     <>
-      <div className="listOfUsersContainer">
-        <div className="listOfUsersBackground"></div>
-        {userDetails && (
-          <ul className="gridListOfUsers">
-            {userDetails.map((user: IUserDetails) => (
+      <div className={style.listOfUsersContainer}>
+        <div className={style.listOfUsersBackground}></div>
+        {usersDetails && (
+          <ul className={style.gridListOfUsers}>
+            {usersDetails.map((user: IUserDetails) => (
               <li key={user.id}>
                 <UserCard user={user} />
               </li>
@@ -25,3 +25,5 @@ export default function UserList() {
    </>
   );
 }
+
+export default UserList;

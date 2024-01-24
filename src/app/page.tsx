@@ -1,19 +1,17 @@
-'use client'
-
-import './globals.css';
-import UsersList from './../components/usersList';
+import UsersList from '../components/usersList';
 import Image from 'next/image';
-import UsersContext from '@/context';
+import {UsersContext} from '../context/UsersContextProvider';
+import './globals.css';
+
 
 export default function Home() {
 
   return (
     <>
-      <header>
-        <div className="homePageHead">
-          <h1 className="title">GitHub&apos;s users:</h1>
+        <div className='homePageHead'>
+          <h1 className='title'>GitHub&apos;s users:</h1>
           <Image
-            className="catImg"
+            className='catImg'
             src="/catImg.png"
             alt={`Cat imagen`}
             width={100}
@@ -21,12 +19,9 @@ export default function Home() {
             priority={true}
           />
         </div>
-      </header>
-      <UsersContext>
-        <main>
-          <UsersList />
-        </main>
-      </UsersContext>
+        <UsersContext>
+          <UsersList/>
+        </UsersContext>
     </>
   );
 }

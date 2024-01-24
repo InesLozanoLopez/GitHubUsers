@@ -1,15 +1,17 @@
-import './../globals.css';
+import React from 'react';
 import UserDetails from '../../components/userDetails';
-import UsersContext from '@/context';
+import { UsersContext } from '../../context/UsersContextProvider';
+import './globals.css'
 
-export default function UserDetailsPage() {
+const AppPage: React.FC = () => {
+
   return (
-    <main>
-      <UsersContext>
-      <div className="main">
+    <>
+      <UsersContext >
         <UserDetails />
-      </div>
-    </UsersContext>
-    </main >
+      </UsersContext>
+    </>
   );
-}
+};
+
+export default AppPage;

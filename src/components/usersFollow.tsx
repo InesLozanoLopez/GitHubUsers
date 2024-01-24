@@ -1,9 +1,9 @@
 'use client';
 
-import './../components/styles/userFollow.css';
-import { IUserDetails } from '@/interfaces';
+import styles from './../styles/userFollow.module.css';
+import { IUserDetails } from '../interfaces/interfaces';
 import { useState, useEffect } from 'react';
-import { fetchUserFollowers, fetchUserFollowing } from '@/apiServices';
+import { fetchUserFollowers, fetchUserFollowing } from '../api/apiServices';
 import Image from 'next/image';
 
 export default function UsersFollow({
@@ -29,22 +29,21 @@ export default function UsersFollow({
     }
   }, [url, login]);
 
-  console.log('usersAvatar', usersAvatar);
 
   return (
     <section
-      className="followCarrussel"
+      className={styles.followCarrussel}
       aria-label={login ? `Following section` : `Followers section`}
     >
       <div>
-        <h3>
+        <h3 className={styles.h3}>
           {login
             ? `Following: ${usersAvatar.length}`
             : `Followers: ${usersAvatar.length}`}
         </h3>
       </div>
-      {/* {isLoading ? (
-        <div className="avatarContainer">
+      {isLoading ? (
+        <div className={styles.avatarContainer}>
           <div
             aria-label="Loading content"
           >
@@ -52,17 +51,17 @@ export default function UsersFollow({
           </div>
         </div>
       ) : (
-        <div className="avatarContainer">
+        <div className={styles.avatarContainer}>
           {usersAvatar &&
             usersAvatar.map((user: IUserDetails) => (
               <div
                 key={user.id}
-                className="avatarImgContainer"
+                className={styles.avatarImgContainer}
                 role="presentation"
                 aria-label="Users avatar"
               >
                 <Image
-                  className="avatarImg"
+                  className={styles.avatarImg}
                   src={user?.avatar_url}
                   alt={`${login}'s ${
                     login
@@ -75,8 +74,8 @@ export default function UsersFollow({
                 />
               </div>
             ))}
-        </div> */}
-      {/* )} */}
+        </div>
+       )}
     </section>
   );
 }
