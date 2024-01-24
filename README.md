@@ -1,5 +1,8 @@
 # GitHubUsers
 Small GitHub Users App done in Next.js
+A list with the firt 10 users from GitHub List is displayed. It is possible to click on each user card to get more details about the user.
+
+In order to reduce API calls, the users and it details are stored locally. The followers and followings users displayed in a carousel on the moreDetails page, are not being stored locally.
 
 <img src="./public/usersListImg.png" alt="Users List Screenshot" width="300" height="auto" style="border: solid black 4px"/>
 
