@@ -6,17 +6,14 @@ import Image from 'next/image';
 import UsersFollow from './usersFollow';
 import { useUsersContext } from '../context/UsersContextProvider';
 import { IUserDetails } from '../interfaces/interfaces';
-import { useRouter, useParams } from 'next/navigation';
 
 const UserDetails: React.FC = () => {
-  const router = useRouter();
-  const { login } = useParams();
+  const login = localStorage.getItem('userLogin');
   const {usersDetails} = useUsersContext();
 
 
   const handleBacktoUserListClick = () => {
-    const path = '/';
-    router.replace(path);
+    localStorage.removeItem('userLogin');
   };
 
   if (!login) {

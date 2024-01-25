@@ -2,23 +2,20 @@
 import styles from './../styles/userCard.module.css';
 import Image from 'next/image';
 import { IUserDetails } from '../interfaces/interfaces';
-import { useRouter } from 'next/navigation';
 
 export default function UserCard({ user }: { user: IUserDetails }) {
   const userDetails = user;
-  const router = useRouter();
 
-  const handleMoreInfoClick = (userData: IUserDetails) => {
-    const path = `${userData?.login}`;
-    router.push(path);
+  const handleMoreInfoClick = () => {
+    localStorage.setItem('userLogin', userDetails.login);
   };
 
   return (
     <div className={styles.userCard} aria-label="User Information">
       {userDetails && (
         <div
-          arial-label="View more information"
-          onClick={() => handleMoreInfoClick(userDetails)}
+          aria-label="View more information"
+          onClick={() => handleMoreInfoClick()}
         >
           <div className={styles.topCard}>
             <div className="avatarImgContainer">

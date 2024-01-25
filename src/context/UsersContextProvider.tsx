@@ -8,7 +8,6 @@ interface UsersContextProps {
   usersDetails: IUserDetails[];
 }
 
-
 const usersContext = createContext<UsersContextProps | []>({usersDetails: []});
 
 export const useUsersContext = () => {
@@ -21,7 +20,6 @@ export const UsersContext: React.FC<{ children: React.ReactNode }> = ({ children
 
   const fetchData = async () => {
     try {
-      console.log('data fetched')
       const userListFetched = await fetchUsersList();
       const updatedUsers = await Promise.all(
         userListFetched.map(async (user: IUserDetails) => {
@@ -30,8 +28,6 @@ export const UsersContext: React.FC<{ children: React.ReactNode }> = ({ children
         })
       );
       setUsersDetails(updatedUsers);
-      localStorage.removeItem('cachedUsersData');
-      localStorage.setItem('cachedUsersData', JSON.stringify(updatedUsers));
       timeFetchedData.current = new Date();
 
     } catch (error) {
@@ -40,17 +36,14 @@ export const UsersContext: React.FC<{ children: React.ReactNode }> = ({ children
 }
   
   useEffect(() => {
-    const cachedData = localStorage.getItem('cachedUsersData');
     const currentTime = new Date();
     const oneHourAgo = currentTime.setHours(currentTime.getHours() - 1)
 
-    if (cachedData && timeFetchedData.current.getTime() < oneHourAgo ){
-      setUsersDetails(JSON.parse(cachedData))
-    } else {
+    if (usersDetails.length === 0 || timeFetchedData.current.getTime() > oneHourAgo ){
       fetchData()
     }
-
   }, [])
+
   return (
     <usersContext.Provider value={{usersDetails}}>
       <main>{children}</main>
